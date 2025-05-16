@@ -1,35 +1,33 @@
-// server.js
 const express = require('express');
 const multer = require('multer');
-const fetch = require('node-fetch');
 const fs = require('fs');
+const FormData = require('form-data');
+const fetch = require('node-fetch');
 const path = require('path');
-const upload = multer({ dest: 'uploads/' });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1372915239640629248/N1ogZd_OKJ-jIlPoeE4F2Jt6p3-thxJ9x7kqrRL7V5GJLeaq9pSgko8qdTI9YgufPXiY';
+const upload = multer({ dest: 'uploads/' });
+const PORT = process.env.PORT || 10000;
+const DISCORD_WEBHOOK = process.env.DISCORD_WEBHOOK;
 
 app.post('/upload', upload.single('image'), async (req, res) => {
   const file = req.file;
-  if (!file) return res.status(400).send('No file uploaded');
+  if (!file) return res.status(400).send('Kein Bild hochgeladen.');
 
-  const filePath = path.join(__dirname, file.path);
-
-  const formData = new FormData();
-  formData.append('file', fs.createReadStream(filePath));
+  const form = new FormData();
+  form.append('file', fs.createReadStream(file.path));
 
   try {
     await fetch(DISCORD_WEBHOOK, {
       method: 'POST',
-      body: formData
+      body: form,
     });
-    fs.unlinkSync(filePath);
-    res.send('OK');
+    fs.unlinkSync(file.path); // Bild löschen
+    res.send('Bild erfolgreich an Discord gesendet!');
   } catch (err) {
-    fs.unlinkSync(filePath);
-    res.status(500).send('Upload failed');
+    fs.unlinkSync(file.path);
+    res.status(500).send('Fehler beim Senden an Discord');
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server läuft auf Port ${PORT}`));
