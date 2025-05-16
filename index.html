@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hochzeit und so</title>
   <!-- Google Fonts -->
+   
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     * {
@@ -257,16 +258,17 @@
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
 </div>
 
-<div class="section" id="section7" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
-    <div style="flex: 1; display: flex; justify-content: center;">
-        <a href="https://www.google.de/maps/place/Hooters+Hamburg+St.+Pauli/@53.5494945,9.9541307,17z/data=!3m1!4b1!4m6!3m5!1s0x47b18f703091bd17:0xa3b2e9d0d681f92b!8m2!3d53.5494945!4d9.956711!16s%2Fg%2F11gfj5jzjr?entry=ttu&g_ep=EgoyMDI1MDUxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
-            <img src="pictures/yassexy.jpeg" alt="Karte anzeigen" style="width: 90%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-        </a>
-    </div>
-    <div style="flex: 1; padding: 20px; color: white; text-align: left;">
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Klicke auf das Bild, um dir die Location in Google Maps anzuzeigen</p>
-    </div>
+<div class="section" id="section7" style="display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
+  <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem;">Teile deine Erinnerungen</h2>
+  <p style="font-size: 1.2rem; margin-bottom: 1rem;">Lade ein Foto hoch, das du auf der Hochzeit gemacht hast!</p>
+  
+  <form id="uploadForm" style="display: flex; flex-direction: column; align-items: center;" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required style="margin-bottom: 1rem; font-size: 1rem;">
+    <button type="submit" style="padding: 10px 20px; background-color: white; color: #d17698; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Bild hochladen</button>
+    <p id="uploadStatus" style="margin-top: 1rem;"></p>
+  </form>
 </div>
+
 
   <script>
     function scrollToNext(el) {
@@ -307,5 +309,41 @@
     // Initial starten
     resetAutoSlide();
   </script>
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+  
+      const form = e.target;
+      const fileInput = form.querySelector('input[type="file"]');
+      const status = document.getElementById('uploadStatus');
+  
+      if (fileInput.files.length === 0) {
+        status.textContent = 'Bitte wähle ein Bild aus.';
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append('image', fileInput.files[0]);
+  
+      try {
+        status.textContent = 'Wird hochgeladen...';
+  
+        const response = await fetch('https://your-server.com/upload', {
+          method: 'POST',
+          body: formData
+        });
+  
+        if (response.ok) {
+          status.textContent = 'Bild erfolgreich hochgeladen!';
+          fileInput.value = '';
+        } else {
+          status.textContent = 'Fehler beim Hochladen.';
+        }
+      } catch (error) {
+        status.textContent = 'Netzwerkfehler. Versuche es später erneut.';
+      }
+    });
+  </script>
+  
 </body>
 </html>
