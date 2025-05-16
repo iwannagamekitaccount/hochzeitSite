@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Hochzeitsanmeldung</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #fdf3f7;
+    }
+    h1 {
+      color: #d17698;
+    }
+    .person-block {
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: white;
+    }
+    input {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      width: 100%;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    #addPerson {
+      background-color: #fff;
+      color: #d17698;
+      border: 2px solid #d17698;
+    }
+    .action-btn {
+      background-color: #d17698;
+      color: white;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hochzeitsanmeldung</h1>
+  <form id="anmeldeForm" action="https://formspree.io/f/xovdrwlv" method="POST">
+    <div class="person-block">
+      <label>Vorname:</label>
+      <input type="text" name="vorname" required>
+      <label>Nachname:</label>
+      <input type="text" name="nachname" required>
+      <label>Telefonnummer:</label>
+      <input type="text" name="telefon" required>
+    </div>
+
+    <div id="weiterePersonen"></div>
+
+    <button type="button" id="addPerson">Weitere Person hinzufügen</button>
+    <br><br>
+    <label>
+      <input type="radio" name="zusage" value="ja" required> Ich komme
+    </label>
+    <label>
+      <input type="radio" name="zusage" value="nein"> Ich kann leider nicht kommen
+    </label>
+    <br><br>
+    <button type="submit" class="action-btn">Abschicken</button>
+  </form>
+
+  <script>
+    let counter = 1;
+
+    document.getElementById('addPerson').addEventListener('click', () => {
+      const container = document.createElement('div');
+      container.className = 'person-block';
+      container.innerHTML = `
+        <label>Vorname +${counter}:</label>
+        <input type="text" name="vorname_plus${counter}" required>
+        <label>Nachname +${counter}:</label>
+        <input type="text" name="nachname_plus${counter}" required>
+        <label>Telefonnummer +${counter}:</label>
+        <input type="text" name="telefon_plus${counter}" required>
+      `;
+      document.getElementById('weiterePersonen').appendChild(container);
+      counter++;
+    });
+  </script>
+</body>
+</html>
