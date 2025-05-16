@@ -150,13 +150,13 @@
 
   <script>
     let personCount = 1;
-
+  
     document.getElementById("add-person").addEventListener("click", () => {
       const container = document.getElementById("additional-persons");
-
+  
       const block = document.createElement("div");
       block.classList.add("person-block");
-
+  
       block.innerHTML = `
         <label for="vorname_${personCount}">Vorname +${personCount}</label>
         <input type="text" name="vorname_${personCount}" placeholder="Vorname +${personCount}" />
@@ -165,26 +165,50 @@
         <label for="telefonnummer_${personCount}">Telefonnummer +${personCount}</label>
         <input type="text" name="telefonnummer_${personCount}" placeholder="Telefonnummer +${personCount}" />
       `;
-
+  
       container.appendChild(block);
       personCount++;
     });
-
+  
+    async function istNameZugelassen(vorname, nachname) {
+      try {
+        const response = await fetch('zulässige_gaeste.json');
+        const erlaubteGaeste = await response.json();
+        return erlaubteGaeste.some(gast =>
+          gast.vorname.toLowerCase() === vorname.toLowerCase().trim() &&
+          gast.nachname.toLowerCase() === nachname.toLowerCase().trim()
+        );
+      } catch (error) {
+        console.error('Fehler beim Laden der JSON:', error);
+        return false;
+      }
+    }
+  
     document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-
+  
       const form = e.target;
+      const vorname = form.querySelector('input[name="vorname"]').value;
+      const nachname = form.querySelector('input[name="nachname"]').value;
+  
+      const erlaubt = await istNameZugelassen(vorname, nachname);
+  
+      if (!erlaubt) {
+        alert('Du bist leider nicht auf der Gästeliste. Bitte kontaktiere das Brautpaar.');
+        return;
+      }
+  
       const data = new FormData(form);
-
+  
       try {
-        const response = await fetch('https://formspree.io/f/xovdrwlv', {
+        const response = await fetch('https://formspree.io/f/DEIN_FORM_ID', {
           method: 'POST',
           body: data,
           headers: {
             'Accept': 'application/json'
           }
         });
-
+  
         if (response.ok) {
           form.innerHTML = `
             <p class='message' style='color:green;'>Danke für deine Anmeldung!</p>
@@ -199,6 +223,6 @@
         form.innerHTML = "<p class='message' style='color:red;'>Verbindungsfehler. Bitte später versuchen.</p>";
       }
     });
-  </script>
+  </script>  
 </body>
 </html>
