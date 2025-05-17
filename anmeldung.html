@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hochzeitsanmeldung5</title>
+  <title>Hochzeitsanmeldung6</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -141,7 +141,7 @@
       </label>
     </div>
 
-    <button type="submit">Zur Essenswahl</button>
+    <button type="submit" id="submit-btn" disabled>Zur Essenswahl</button>
 
     <div class="center">
       <a href="index.html" class="home-button">Zurück zur Homepage</a>
@@ -169,6 +169,23 @@
 
       container.appendChild(block);
       personCount++;
+    });
+
+    // Button-Verhalten je nach Radio-Button-Auswahl
+    const submitButton = document.getElementById("submit-btn");
+    const radios = document.querySelectorAll('input[name="status"]');
+
+    radios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.checked) {
+          submitButton.disabled = false;
+          if (radio.value === "zusagen") {
+            submitButton.textContent = "Zur Essenswahl";
+          } else if (radio.value === "absagen") {
+            submitButton.textContent = "Absage bestätigen";
+          }
+        }
+      });
     });
 
     async function istNameZugelassen(vorname, nachname) {
@@ -201,7 +218,6 @@
 
       const data = new FormData(form);
 
-      // Telefonnummern als einzelne Felder anfügen
       const hauptnummer = form.querySelector('input[name="telefonnummer"]').value?.trim();
       if (hauptnummer) {
         data.append("Telefonnummer Hauptperson", hauptnummer);
