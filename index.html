@@ -32,6 +32,7 @@
       color: white;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
       position: relative;
+      scroll-snap-align: start;
     }
 
     #section1 {
@@ -202,14 +203,14 @@
     }
   </style>
 </head>
-<body>
+<body style="scroll-snap-type: y mandatory; overflow-y: scroll;">
   <div class="section" id="section1">
     <div class="couple-text">
       <div class="name">Bilal</div>
       <span class="and">und</span>
       <div class="name">Tina</div>
     </div>
-    <div class="date">24. August 2025</div>
+    <div class="date">version: 0.1</div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
 
@@ -235,6 +236,7 @@
       <div class="arrow left" onclick="prevSlide()">‹</div>
       <div class="arrow right" onclick="nextSlide()">›</div>
     </div>
+    <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
 
   <div class="section" id="section5">
@@ -302,6 +304,49 @@
 
     // Initial starten
     resetAutoSlide();
-  </script>  
+  </script>
+  <script>
+    // Bestehende Funktionen wie scrollToNext(), Slider etc. bleiben unangetastet
+  
+    const sections = document.querySelectorAll(".section");
+    let currentSectionIndex = 0;
+    let isScrolling = false;
+  
+    function scrollToSection(index) {
+      if (index >= 0 && index < sections.length) {
+        isScrolling = true;
+        sections[index].scrollIntoView({ behavior: "smooth" });
+        currentSectionIndex = index;
+        setTimeout(() => {
+          isScrolling = false;
+        }, 800); // verhindert schnelles Spammen
+      }
+    }
+  
+    document.addEventListener("keydown", (e) => {
+      if (isScrolling) return;
+  
+      if (e.key === "ArrowDown") {
+        scrollToSection(currentSectionIndex + 1);
+      } else if (e.key === "ArrowUp") {
+        scrollToSection(currentSectionIndex - 1);
+      }
+    });
+  
+    // Optional: automatisch den aktuell sichtbaren Index erkennen
+    // damit z.B. auch manuelles Scrollen den Index aktualisiert
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            currentSectionIndex = Array.from(sections).indexOf(entry.target);
+          }
+        });
+      },
+      { threshold: 0.6 } // mindestens 60 % sichtbar
+    );
+  
+    sections.forEach((section) => observer.observe(section));
+  </script>    
 </body>
 </html>
