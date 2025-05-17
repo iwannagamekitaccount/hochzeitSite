@@ -243,14 +243,25 @@
     }
 
     #section6 {
-      display: flex;
-      flex-direction: row;
-      background-color: #bedcaa;
+      position: relative;
+      background-image: url('pictures/blossomtree.jpeg');
+      background-size: cover;
+      background-position: center;
       color: white;
-      padding: 20px;
-      gap: 30px;
+      padding: 60px 20px;
+      text-align: left;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .section6-overlay {
+      background-color: rgba(0, 0, 0, 0.5); /* dunkler Overlay für Lesbarkeit */
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 800px;
+      width: 100%;
     }
 
     .section6-text {
@@ -396,23 +407,22 @@
   </div>
 
   <div class="section" id="section6">
-    <div class="section6-text">
-      <p class="section6-question">Wo ist die Hochzeitslocation?</p>
-      <p class="section6-answer">Die Hochzeit findet in der Hauptstadt von Nordmazedonien, Skopje, im Stadtteil xxyy statt.</p>
-      <br>
-      <p class="section6-question">Was ist der Dress Code?</p>
-      <p class="section6-answer">Anzug und Kleid, aber seid bereit dafür, dass es sehr warm wird.</p>
-      <br>
-      <p class="section6-question">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
-      <p class="section6-answer">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
-      <br>
-      <p class="section6-question">Wo kann ich unterkommen?</p>
-      <p class="section6-answer">
-        Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die fußläufig erreichbar und von uns empfohlen werden.
-      </p>
-    </div>
-    <div class="section6-image">
-      <img src="pictures/blossomtree.jpeg" alt="Bild" />
+    <div class="section6-overlay">
+      <div class="section6-text">
+        <p class="section6-question">Wo ist die Hochzeitslocation?</p>
+        <p class="section6-answer">Die Hochzeit findet in der Hauptstadt von Nordmazedonien, Skopje, im Stadtteil xxyy statt.</p>
+        <br>
+        <p class="section6-question">Was ist der Dress Code?</p>
+        <p class="section6-answer">Anzug und Kleid, aber seid bereit dafür, dass es sehr warm wird.</p>
+        <br>
+        <p class="section6-question">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
+        <p class="section6-answer">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
+        <br>
+        <p class="section6-question">Wo kann ich unterkommen?</p>
+        <p class="section6-answer">
+          Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die fußläufig erreichbar und von uns empfohlen werden.
+        </p>
+      </div>
     </div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
