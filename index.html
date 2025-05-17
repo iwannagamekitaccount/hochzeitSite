@@ -240,22 +240,29 @@
   </div>
 
   <div class="section" id="section5">
+    <div id="countdown" style="font-size: 2rem; font-weight: bold; background-color: rgba(0,0,0,0.5); padding: 20px 30px; border-radius: 12px;">
+      Countdown läuft...
+    </div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
+  
 
 <div class="section" id="section6" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
     <div style="flex: 1; display: flex; justify-content: center;">
         <img src="pictures/blossomtree.jpeg" alt="Bild" style="width: 90%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
     </div>
     <div style="flex: 1; padding: 20px; color: white; text-align: left;">
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wie erreiche ich die Hochzeit?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Fahr halt hin, nicht barrierefrei.</p>
+        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo ist die Hochzeitslocation?</p>
+        <p style="font-size: 1.2rem; line-height: 1.5;">Die Hochzeit findet im Stadtteil xxyy statt.</p>
         <br>
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Was sollte ich anziehen?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Irgendwas schönes. Wehe jemand anderes als die Braut trägt weiß, dann schallerts.</p>
+        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Was ist der Dress Code?</p>
+        <p style="font-size: 1.2rem; line-height: 1.5;">Anzug und Kleid, aber seit bereit dafür, dass es sehr warm wird.</p>
         <br>
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Kann ich spezielles Essen anfordern?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Wenns sein muss........ Aber du trinkst hoffentlich !!!</p>
+        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
+        <p style="font-size: 1.2rem; line-height: 1.5;">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
+        <br>
+        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo kann ich unterkommen?</p>
+        <p style="font-size: 1.2rem; line-height: 1.5;">Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die in der Nähe sind und von uns empfohlen werden.</p>
     </div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
 </div>
@@ -347,6 +354,30 @@
     );
   
     sections.forEach((section) => observer.observe(section));
-  </script>    
+  </script>
+  <script>
+    const countdownEl = document.getElementById("countdown");
+    const targetDate = new Date("2026-09-25T10:00:00");
+  
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+  
+      if (diff <= 0) {
+        countdownEl.textContent = "Es ist so weit!";
+        return;
+      }
+  
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+  
+      countdownEl.textContent = `${days} Tage ${hours} Std ${minutes} Min ${seconds} Sek`;
+    }
+  
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>  
 </body>
 </html>

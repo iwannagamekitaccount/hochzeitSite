@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empfohlene Hotels</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #f8f1f4;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 3rem;
+      color: #d17698;
+    }
+
+    .hotel-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px;
+    }
+
+    .hotel-card {
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 300px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .hotel-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .hotel-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .hotel-info {
+      padding: 20px;
+    }
+
+    .hotel-info h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #d17698;
+    }
+
+    .hotel-info p {
+      margin: 6px 0;
+      font-size: 1rem;
+    }
+
+    .hotel-info a {
+      color: #d17698;
+      text-decoration: none;
+    }
+
+    .hotel-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Empfohlene Hotels</h1>
+
+  <div class="hotel-list">
+
+    <div class="hotel-card">
+      <img src="pictures/yas1.jpeg" alt="Hotelbild">
+      <div class="hotel-info">
+        <h2>Hotel Rosenhof</h2>
+        <p><strong>Homepage:</strong> <a href="https://hotel-rosenhof.example.com" target="_blank">hotel-rosenhof.example.com</a></p>
+        <p><strong>Telefon:</strong> 01234 / 567890</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:info@hotel-rosenhof.example.com">info@hotel-rosenhof.example.com</a></p>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <img src="pictures/yas1.jpeg" alt="Hotelbild">
+      <div class="hotel-info">
+        <h2>Landhotel Sonnenschein</h2>
+        <p><strong>Homepage:</strong> <a href="https://landhotel-sonne.example.com" target="_blank">landhotel-sonne.example.com</a></p>
+        <p><strong>Telefon:</strong> 09876 / 543210</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:kontakt@landhotel-sonne.example.com">kontakt@landhotel-sonne.example.com</a></p>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <img src="pictures/yas1.jpeg" alt="Hotelbild">
+      <div class="hotel-info">
+        <h2>Pension Am Waldrand</h2>
+        <p><strong>Homepage:</strong> <a href="https://pension-waldrand.example.com" target="_blank">pension-waldrand.example.com</a></p>
+        <p><strong>Telefon:</strong> 03456 / 789012</p>
+        <p><strong>E-Mail:</strong> <a href="mailto:mail@pension-waldrand.example.com">mail@pension-waldrand.example.com</a></p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
