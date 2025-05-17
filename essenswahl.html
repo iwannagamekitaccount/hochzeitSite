@@ -21,16 +21,29 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    label {
+      margin: 4px 0;
+    }
+
     textarea {
-      width: 90%;
-      padding: 10px;
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px;
       border-radius: 5px;
       border: 1px solid #ccc;
       resize: vertical;
     }
 
     button {
-      margin-top: 20px;
+      margin-top: 30px;
       padding: 10px 20px;
       background-color: #d17698;
       color: white;
@@ -42,7 +55,6 @@
     .message {
       margin-top: 30px;
       font-weight: bold;
-      color: green;
     }
   </style>
 </head>
@@ -59,13 +71,28 @@
     const form = document.getElementById("essen-form");
     const resultDiv = document.getElementById("result");
 
+    const diaeten = [
+      "Vegan",
+      "Vegetarisch",
+      "Pescetarisch",
+      "Glutenfrei",
+      "Laktosefrei"
+    ];
+
     personen.forEach((name, index) => {
       const section = document.createElement("div");
       section.className = "person-section";
 
+      const checkboxes = diaeten.map(d =>
+        `<label><input type="checkbox" name="person_${index}_diaet" value="${d}"> ${d}</label>`
+      ).join("");
+
       section.innerHTML = `
         <h2>${name}</h2>
-        <textarea name="essen_${index}" rows="4" placeholder="Essenswunsch oder Allergien"></textarea>
+        <div class="checkbox-group">
+          ${checkboxes}
+        </div>
+        <textarea name="person_${index}_sonstiges" rows="2" placeholder="Sonstiges / Allergien / Anmerkungen"></textarea>
       `;
 
       form.appendChild(section);
@@ -75,10 +102,16 @@
       e.preventDefault();
 
       const formData = new FormData();
-      personen.forEach((name, i) => {
-        const wunsch = form.querySelector(`textarea[name="essen_${i}"]`).value;
-        formData.append(`Person ${i + 1} Name`, name);
-        formData.append(`Person ${i + 1} Wunsch`, wunsch);
+
+      personen.forEach((name, index) => {
+        formData.append(`Person ${index + 1} Name`, name);
+
+        const checkboxes = form.querySelectorAll(`input[name="person_${index}_diaet"]:checked`);
+        const ausgewaehlt = Array.from(checkboxes).map(cb => cb.value).join(", ");
+        formData.append(`Person ${index + 1} Auswahl`, ausgewaehlt);
+
+        const sonstiges = form.querySelector(`textarea[name="person_${index}_sonstiges"]`).value;
+        formData.append(`Person ${index + 1} Sonstiges`, sonstiges);
       });
 
       try {
@@ -90,7 +123,7 @@
 
         if (response.ok) {
           resultDiv.textContent = "Vielen Dank für eure Essenswünsche!";
-          form.remove(); // Versteckt das Formular
+          form.remove();
         } else {
           resultDiv.textContent = "Fehler beim Absenden. Bitte versuche es erneut.";
           resultDiv.style.color = "red";
