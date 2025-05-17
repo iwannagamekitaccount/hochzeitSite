@@ -164,7 +164,7 @@
         <label for="nachname_${personCount}">Nachname</label>
         <input type="text" name="nachname_${personCount}" placeholder="Nachname" />
         <label for="telefonnummer_${personCount}">Telefonnummer</label>
-        <input type="text" name="telefonnummer_${personCount}" placeholder="Telefonnummer" />
+        <input type="text" name="telefonnummer_${personCount}" placeholder="+49 160 1234567" />
       `;
   
       container.appendChild(block);
@@ -211,16 +211,25 @@
         });
   
         if (response.ok) {
-          form.innerHTML = `
-            <p class='message' style='color:green;'>Danke für deine Anmeldung!</p>
-            <div class="center">
-              <a href="index.html" class="home-button">Zurück zur Homepage</a>
-            </div>
-          `;
-        } else {
-          form.innerHTML = "<p class='message' style='color:red;'>Fehler beim Absenden. Bitte versuche es erneut.</p>";
+            // Sammle Namen
+            const personen = [];
+            personen.push(`${vorname.trim()} ${nachname.trim()}`);
+
+            for (let i = 0; i < personCount - 1; i++) {
+                const v = form.querySelector(`input[name="vorname_${i}"]`)?.value?.trim();
+                const n = form.querySelector(`input[name="nachname_${i}"]`)?.value?.trim();
+                if (v && n) {
+                    personen.push(`${v} ${n}`);
+                }
+            }
+
+            // Speichere in localStorage
+            localStorage.setItem("essenspersonen", JSON.stringify(personen));
+
+            // Weiterleitung zur Essenswahl-Seite
+            window.location.href = "essenswahl.html";
         }
-      } catch (error) {
+    } catch (error) {
         form.innerHTML = "<p class='message' style='color:red;'>Verbindungsfehler. Bitte später versuchen.</p>";
       }
     });

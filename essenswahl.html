@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essenswahl</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fdf0f5;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .person-section {
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: 90%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #d17698;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 30px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Essenswünsche eintragen</h1>
+  <form id="essen-form"></form>
+
+  <button type="submit" form="essen-form">Absenden</button>
+
+  <div id="result" class="message"></div>
+
+  <script>
+    const personen = JSON.parse(localStorage.getItem("essenspersonen")) || [];
+    const form = document.getElementById("essen-form");
+    const resultDiv = document.getElementById("result");
+
+    personen.forEach((name, index) => {
+      const section = document.createElement("div");
+      section.className = "person-section";
+
+      section.innerHTML = `
+        <h2>${name}</h2>
+        <textarea name="essen_${index}" rows="4" placeholder="Essenswunsch oder Allergien"></textarea>
+      `;
+
+      form.appendChild(section);
+    });
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const formData = new FormData();
+      personen.forEach((name, i) => {
+        const wunsch = form.querySelector(`textarea[name="essen_${i}"]`).value;
+        formData.append(`Person ${i + 1} Name`, name);
+        formData.append(`Person ${i + 1} Wunsch`, wunsch);
+      });
+
+      try {
+        const response = await fetch('https://formspree.io/f/xovdrwlv', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          resultDiv.textContent = "Vielen Dank für eure Essenswünsche!";
+          form.remove(); // Versteckt das Formular
+        } else {
+          resultDiv.textContent = "Fehler beim Absenden. Bitte versuche es erneut.";
+          resultDiv.style.color = "red";
+        }
+      } catch (error) {
+        resultDiv.textContent = "Netzwerkfehler. Bitte später versuchen.";
+        resultDiv.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>
