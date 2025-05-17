@@ -172,7 +172,7 @@
   
     async function istNameZugelassen(vorname, nachname) {
       try {
-        const response = await fetch('zulässige_gaeste.json');
+        const response = await fetch('gaesteliste.json');
         const erlaubteGaeste = await response.json();
         return erlaubteGaeste.some(gast =>
           gast.vorname.toLowerCase() === vorname.toLowerCase().trim() &&
