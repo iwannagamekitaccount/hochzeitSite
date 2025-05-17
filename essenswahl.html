@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Essenswahl3</title>
+  <title>Essenswahl4</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -56,20 +56,29 @@
       margin-top: 30px;
       font-weight: bold;
     }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <h1>Essenswünsche eintragen</h1>
   <form id="essen-form"></form>
 
-  <button type="submit" form="essen-form">Absenden</button>
+  <button type="submit" id="submit-btn" form="essen-form">Absenden</button>
 
   <div id="result" class="message"></div>
+  <a id="home-link" href="index.html" class="hidden">
+    <button>Zurück zur Homepage</button>
+  </a>
 
   <script>
     const personen = JSON.parse(localStorage.getItem("essenspersonen")) || [];
     const form = document.getElementById("essen-form");
     const resultDiv = document.getElementById("result");
+    const submitBtn = document.getElementById("submit-btn");
+    const homeLink = document.getElementById("home-link");
 
     const diaeten = [
       "Vegan",
@@ -123,7 +132,9 @@
 
         if (response.ok) {
           resultDiv.textContent = "Vielen Dank für eure Essenswünsche!";
-          form.remove();
+          submitBtn.remove(); // Absende-Button entfernen
+          homeLink.classList.remove("hidden"); // Home-Link anzeigen
+          form.remove(); // Formular ausblenden
         } else {
           resultDiv.textContent = "Fehler beim Absenden. Bitte versuche es erneut.";
           resultDiv.style.color = "red";
