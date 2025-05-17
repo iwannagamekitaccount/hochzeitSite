@@ -242,7 +242,62 @@
       color: #555;
     }
 
-    #section6,
+    #section6 {
+      display: flex;
+      flex-direction: row;
+      background-color: #bedcaa;
+      color: white;
+      padding: 20px;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section6-text {
+      flex: 1;
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .section6-question {
+      font-weight: bold;
+    }
+
+    .section6-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .section6-image img {
+      width: 90%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      #section6 {
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .section6-text, .section6-image {
+        width: 100%;
+        padding: 10px;
+      }
+
+      .section6-text {
+        font-size: 1rem;
+      }
+
+      .section6-image img {
+        width: 90%;
+        margin: 20px auto;
+        display: block;
+      }
+    }
     #section7 {
       background-color: #bedcaa;
       overflow: hidden;
@@ -265,7 +320,7 @@
       <span class="and">und</span>
       <div class="name">Bilal</div>
     </div>
-    <div class="date">version: 0.4</div>
+    <div class="date">version: 0.5</div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
 
@@ -340,22 +395,24 @@
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
 
-  <div class="section" id="section6" style="flex-direction: row;">
-    <div style="flex: 1; display: flex; justify-content: center;">
-      <img src="pictures/blossomtree.jpeg" alt="Bild" style="width: 90%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+  <div class="section" id="section6">
+    <div class="section6-text">
+      <p class="section6-question">Wo ist die Hochzeitslocation?</p>
+      <p class="section6-answer">Die Hochzeit findet in der Hauptstadt von Nordmazedonien, Skopje, im Stadtteil xxyy statt.</p>
+      <br>
+      <p class="section6-question">Was ist der Dress Code?</p>
+      <p class="section6-answer">Anzug und Kleid, aber seid bereit dafür, dass es sehr warm wird.</p>
+      <br>
+      <p class="section6-question">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
+      <p class="section6-answer">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
+      <br>
+      <p class="section6-question">Wo kann ich unterkommen?</p>
+      <p class="section6-answer">
+        Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die fußläufig erreichbar und von uns empfohlen werden.
+      </p>
     </div>
-    <div style="flex: 1; padding: 20px; color: white; text-align: left;">
-      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo ist die Hochzeitslocation?</p>
-      <p style="font-size: 1.2rem; line-height: 1.5;">Die Hochzeit findet in der Hauptstadt von Nordmazedonien, Skopje, im Stadtteil xxyy statt.</p>
-      <br>
-      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Was ist der Dress Code?</p>
-      <p style="font-size: 1.2rem; line-height: 1.5;">Anzug und Kleid, aber seit bereit dafür, dass es sehr warm wird.</p>
-      <br>
-      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
-      <p style="font-size: 1.2rem; line-height: 1.5;">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
-      <br>
-      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo kann ich unterkommen?</p>
-      <p style="font-size: 1.2rem; line-height: 1.5;">Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die fußläufig erreichbar und von uns empfohlen werden.</p>
+    <div class="section6-image">
+      <img src="pictures/blossomtree.jpeg" alt="Bild" />
     </div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
