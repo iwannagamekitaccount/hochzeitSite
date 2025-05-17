@@ -2,16 +2,52 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Formular</title>
+  <title>Benutzerdaten speichern</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0071a1;
+    }
+  </style>
 </head>
 <body>
-  <h2>Benutzerdaten</h2>
-  <form>
-    <label for="vorname">Vorname:</label><br>
-    <input type="text" id="vorname" name="vorname"><br><br>
+  <h2>Benutzerdatenformular</h2>
+  <form action="https://flask-backend-okte.onrender.com/speichern" method="POST">
+    <label for="vorname">Vorname:</label>
+    <input type="text" id="vorname" name="vorname" required>
 
-    <label for="nachname">Nachname:</label><br>
-    <input type="text" id="nachname" name="nachname"><br><br>
+    <label for="nachname">Nachname:</label>
+    <input type="text" id="nachname" name="nachname" required>
 
     <button type="submit">Speichern</button>
   </form>
