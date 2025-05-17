@@ -123,7 +123,7 @@
       <label for="nachname">Nachname</label>
       <input type="text" name="nachname" placeholder="Mustermann" required />
       <label for="telefonnummer">Telefonnummer</label>
-      <input type="text" name="telefonnummer" placeholder="0171 1234567" required />
+      <input type="text" name="telefonnummer" placeholder="+49 160 1234567" required />
     </div>
 
     <div id="additional-persons"></div>
@@ -158,12 +158,13 @@
       block.classList.add("person-block");
   
       block.innerHTML = `
-        <label for="vorname_${personCount}">Vorname +${personCount}</label>
-        <input type="text" name="vorname_${personCount}" placeholder="Vorname +${personCount}" />
-        <label for="nachname_${personCount}">Nachname +${personCount}</label>
-        <input type="text" name="nachname_${personCount}" placeholder="Nachname +${personCount}" />
-        <label for="telefonnummer_${personCount}">Telefonnummer +${personCount}</label>
-        <input type="text" name="telefonnummer_${personCount}" placeholder="Telefonnummer +${personCount}" />
+        <h3>Begleitperson ${personCount}</h3>
+        <label for="vorname_${personCount}">Vorname</label>
+        <input type="text" name="vorname_${personCount}" placeholder="Vorname" />
+        <label for="nachname_${personCount}">Nachname</label>
+        <input type="text" name="nachname_${personCount}" placeholder="Nachname" />
+        <label for="telefonnummer_${personCount}">Telefonnummer</label>
+        <input type="text" name="telefonnummer_${personCount}" placeholder="Telefonnummer" />
       `;
   
       container.appendChild(block);
