@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hochzeit und so</title>
-  <!-- Google Fonts -->
-   
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -180,14 +179,48 @@
       background-repeat: no-repeat;
     }
 
-    #section6 {
-      background-color: #d17698;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    #countdown-container {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      font-family: 'Cormorant Garamond', serif;
+      color: #d17698;
     }
 
+    #countdown-container h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    #countdown-timer {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+    }
+
+    .time-box .number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #d17698;
+    }
+
+    .time-box .label {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    #section6,
     #section7 {
       background-color: #d17698;
       overflow: hidden;
@@ -210,7 +243,7 @@
       <span class="and">und</span>
       <div class="name">Bilal</div>
     </div>
-    <div class="date">version: 0.2</div>
+    <div class="date">version: 0.3</div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
 
@@ -240,38 +273,54 @@
   </div>
 
   <div class="section" id="section5">
-    <div id="countdown" style="font-size: 2rem; font-weight: bold; background-color: rgba(0,0,0,0.5); padding: 20px 30px; border-radius: 12px;">
-      Countdown läuft...
+    <div id="countdown-container">
+      <h2>Nur noch</h2>
+      <div id="countdown-timer">
+        <div class="time-box">
+          <span class="number" id="days">00</span>
+          <span class="label">Tage</span>
+        </div>
+        <div class="time-box">
+          <span class="number" id="hours">00</span>
+          <span class="label">Stunden</span>
+        </div>
+        <div class="time-box">
+          <span class="number" id="minutes">00</span>
+          <span class="label">Minuten</span>
+        </div>
+        <div class="time-box">
+          <span class="number" id="seconds">00</span>
+          <span class="label">Sekunden</span>
+        </div>
+      </div>
     </div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
   </div>
-  
 
-<div class="section" id="section6" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+  <div class="section" id="section6" style="flex-direction: row;">
     <div style="flex: 1; display: flex; justify-content: center;">
-        <img src="pictures/blossomtree.jpeg" alt="Bild" style="width: 90%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+      <img src="pictures/blossomtree.jpeg" alt="Bild" style="width: 90%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
     </div>
     <div style="flex: 1; padding: 20px; color: white; text-align: left;">
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo ist die Hochzeitslocation?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Die Hochzeit findet im Stadtteil xxyy statt.</p>
-        <br>
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Was ist der Dress Code?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Anzug und Kleid, aber seit bereit dafür, dass es sehr warm wird.</p>
-        <br>
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
-        <br>
-        <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo kann ich unterkommen?</p>
-        <p style="font-size: 1.2rem; line-height: 1.5;">Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die in der Nähe sind und von uns empfohlen werden.</p>
+      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo ist die Hochzeitslocation?</p>
+      <p style="font-size: 1.2rem; line-height: 1.5;">Die Hochzeit findet in der Hauptstadt von Nordmazedonien, Skopje, im Stadtteil xxyy statt.</p>
+      <br>
+      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Was ist der Dress Code?</p>
+      <p style="font-size: 1.2rem; line-height: 1.5;">Anzug und Kleid, aber seit bereit dafür, dass es sehr warm wird.</p>
+      <br>
+      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wie kann ich auf eine bestimmte Diät hinweisen?</p>
+      <p style="font-size: 1.2rem; line-height: 1.5;">Wenn du zusagst, bei der Hochzeit dabei zu sein, weiter unten auf dieser Seite, kannst du uns gerne deine Diät mitteilen.</p>
+      <br>
+      <p style="font-size: 1.2rem; line-height: 1.5; font-weight: bold;">Wo kann ich unterkommen?</p>
+      <p style="font-size: 1.2rem; line-height: 1.5;">Klicke <a href="hotels.html" style="color: white; text-decoration: underline;">hier</a>, für eine Liste an Hotels die fußläufig erreichbar und von uns empfohlen werden.</p>
     </div>
     <div class="scroll-down" onclick="scrollToNext(this)">↓</div>
-</div>
+  </div>
 
-<div class="section" id="section7" style="flex-direction: column; align-items: center; justify-content: center; color: white; text-align: center;">
-  <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Seid ihr dabei?</h2>
-  <a href="anmeldung.html" style="padding: 10px 20px; background-color: white; color: #d17698; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.2rem;">Zur Anmeldung</a>
-</div>
-
+  <div class="section" id="section7" style="flex-direction: column; color: white; text-align: center;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Bist du dabei?</h2>
+    <a href="anmeldung.html" style="padding: 10px 20px; background-color: white; color: #d17698; font-weight: bold; border-radius: 8px; text-decoration: none; font-size: 1.2rem;">Zur Anmeldung</a>
+  </div>
 
   <script>
     function scrollToNext(el) {
@@ -309,16 +358,13 @@
       resetAutoSlide();
     }
 
-    // Initial starten
     resetAutoSlide();
-  </script>
-  <script>
-    // Bestehende Funktionen wie scrollToNext(), Slider etc. bleiben unangetastet
-  
+
+    // Tastatursteuerung
     const sections = document.querySelectorAll(".section");
     let currentSectionIndex = 0;
     let isScrolling = false;
-  
+
     function scrollToSection(index) {
       if (index >= 0 && index < sections.length) {
         isScrolling = true;
@@ -326,22 +372,20 @@
         currentSectionIndex = index;
         setTimeout(() => {
           isScrolling = false;
-        }, 800); // verhindert schnelles Spammen
+        }, 800);
       }
     }
-  
+
     document.addEventListener("keydown", (e) => {
       if (isScrolling) return;
-  
+
       if (e.key === "ArrowDown") {
         scrollToSection(currentSectionIndex + 1);
       } else if (e.key === "ArrowUp") {
         scrollToSection(currentSectionIndex - 1);
       }
     });
-  
-    // Optional: automatisch den aktuell sichtbaren Index erkennen
-    // damit z.B. auch manuelles Scrollen den Index aktualisiert
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -350,34 +394,36 @@
           }
         });
       },
-      { threshold: 0.6 } // mindestens 60 % sichtbar
+      { threshold: 0.6 }
     );
-  
+
     sections.forEach((section) => observer.observe(section));
-  </script>
-  <script>
-    const countdownEl = document.getElementById("countdown");
+
+    // Countdown
     const targetDate = new Date("2026-09-25T10:00:00");
-  
+
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
-  
+
       if (diff <= 0) {
-        countdownEl.textContent = "Es ist so weit!";
+        document.getElementById("countdown-container").innerHTML = "<h2>Es ist so weit! 🎉</h2>";
         return;
       }
-  
+
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-  
-      countdownEl.textContent = `${days} Tage ${hours} Std ${minutes} Min ${seconds} Sek`;
+
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
     }
-  
+
     updateCountdown();
     setInterval(updateCountdown, 1000);
-  </script>  
+  </script>
 </body>
 </html>
