@@ -150,13 +150,13 @@
 
   <script>
     let personCount = 1;
-  
+
     document.getElementById("add-person").addEventListener("click", () => {
       const container = document.getElementById("additional-persons");
-  
+
       const block = document.createElement("div");
       block.classList.add("person-block");
-  
+
       block.innerHTML = `
         <h3>Begleitperson ${personCount}</h3>
         <label for="vorname_${personCount}">Vorname</label>
@@ -166,11 +166,11 @@
         <label for="telefonnummer_${personCount}">Telefonnummer</label>
         <input type="text" name="telefonnummer_${personCount}" placeholder="+49 160 1234567" />
       `;
-  
+
       container.appendChild(block);
       personCount++;
     });
-  
+
     async function istNameZugelassen(vorname, nachname) {
       try {
         const response = await fetch('gaesteliste.json');
@@ -184,23 +184,23 @@
         return false;
       }
     }
-  
+
     document.getElementById('rsvp-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-  
+
       const form = e.target;
       const vorname = form.querySelector('input[name="vorname"]').value;
       const nachname = form.querySelector('input[name="nachname"]').value;
-  
+
       const erlaubt = await istNameZugelassen(vorname, nachname);
-  
+
       if (!erlaubt) {
         alert('Du bist leider nicht auf der Gästeliste. Bitte kontaktiere das Brautpaar.');
         return;
       }
-  
+
       const data = new FormData(form);
-  
+
       try {
         const response = await fetch('https://formspree.io/f/xovdrwlv', {
           method: 'POST',
@@ -209,30 +209,29 @@
             'Accept': 'application/json'
           }
         });
-  
+
         if (response.ok) {
-            // Sammle Namen
-            const personen = [];
-            personen.push(`${vorname.trim()} ${nachname.trim()}`);
+          // Sammle Namen
+          const personen = [];
+          personen.push(`${vorname.trim()} ${nachname.trim()}`);
 
-            for (let i = 0; i < personCount - 1; i++) {
-                const v = form.querySelector(`input[name="vorname_${i}"]`)?.value?.trim();
-                const n = form.querySelector(`input[name="nachname_${i}"]`)?.value?.trim();
-                if (v && n) {
-                    personen.push(`${v} ${n}`);
-                }
+          for (let i = 1; i < personCount; i++) {
+            const v = form.querySelector(`input[name="vorname_${i}"]`)?.value?.trim();
+            const n = form.querySelector(`input[name="nachname_${i}"]`)?.value?.trim();
+            if (v && n) {
+              personen.push(`${v} ${n}`);
             }
+          }
 
-            // Speichere in localStorage
-            localStorage.setItem("essenspersonen", JSON.stringify(personen));
-
-            // Weiterleitung zur Essenswahl-Seite
-            window.location.href = "essenswahl.html";
+          localStorage.setItem("essenspersonen", JSON.stringify(personen));
+          window.location.href = "essenswahl.html";
+        } else {
+          form.innerHTML = "<p class='message' style='color:red;'>Es gab ein Problem beim Absenden. Bitte versuche es erneut.</p>";
         }
-    } catch (error) {
+      } catch (error) {
         form.innerHTML = "<p class='message' style='color:red;'>Verbindungsfehler. Bitte später versuchen.</p>";
       }
     });
-  </script>  
+  </script>
 </body>
 </html>
