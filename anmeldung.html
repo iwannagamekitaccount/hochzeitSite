@@ -201,6 +201,18 @@
 
       const data = new FormData(form);
 
+      // Telefonnnummern sammeln
+      const telefonnummern = [];
+      const hauptnummer = form.querySelector('input[name="telefonnummer"]').value?.trim();
+      if (hauptnummer) telefonnummern.push(hauptnummer);
+
+      for (let i = 1; i < personCount; i++) {
+        const nummer = form.querySelector(`input[name="telefonnummer_${i}"]`)?.value?.trim();
+        if (nummer) telefonnummern.push(nummer);
+      }
+
+      data.append("alle_telefonnummern", telefonnummern.join(', '));
+
       try {
         const response = await fetch('https://formspree.io/f/xovdrwlv', {
           method: 'POST',
@@ -223,10 +235,11 @@
             }
           }
 
+          // Speichere in localStorage
           localStorage.setItem("essenspersonen", JSON.stringify(personen));
+
+          // Weiterleitung zur Essenswahl-Seite
           window.location.href = "essenswahl.html";
-        } else {
-          form.innerHTML = "<p class='message' style='color:red;'>Es gab ein Problem beim Absenden. Bitte versuche es erneut.</p>";
         }
       } catch (error) {
         form.innerHTML = "<p class='message' style='color:red;'>Verbindungsfehler. Bitte später versuchen.</p>";
